@@ -22,10 +22,10 @@
       <!-- Dashboard: 4 tarjetas -->
       <div class="cards">
         <div class="card gold"><label>Efectivo en mano</label><strong id="cCash">$0.00</strong></div>
-        <div class="card"><label>Acumulado en terminal</label><strong id="cTerm">$0.00</strong>
+        <div class="card"><label>Acumulado en terminal</label><strong id="cTerm">$0.00</strong><small id="cPers"></small>
           <button id="btnClose" class="mini" type="button">Transferido / Cierre</button></div>
         <div class="card red"><label>Gastos del día</label><strong id="cExp">$0.00</strong></div>
-        <div class="card green"><label>Ganancia neta real</label><strong id="cNet">$0.00</strong></div>
+        <div class="card green"><label>Ganancia neta real</label><strong id="cNet">$0.00</strong><small id="cNetSub"></small></div>
       </div>
 
       <div class="datebar"><input type="date" id="dateSel" aria-label="Fecha"><button id="btnToday" type="button">Hoy</button></div>
@@ -47,6 +47,14 @@
             <div class="seg" id="payTabs">
               <button type="button" data-pay="cash" class="on">💵 Efectivo</button>
               <button type="button" data-pay="card">💳 Terminal</button>
+              <button type="button" data-pay="personal" class="only-out">🙋 Mi tarjeta</button>
+            </div>
+          </div>
+          <div class="fld only-in">
+            <span>La propina se pagó en</span>
+            <div class="seg" id="tipTabs">
+              <button type="button" data-tp="cash" class="on">💵 Efectivo</button>
+              <button type="button" data-tp="card">💳 Terminal</button>
             </div>
           </div>
           <label class="fld only-out">Categoría
@@ -76,6 +84,7 @@
     <!-- ================= VISTA: RESUMEN ================= -->
     <section id="view-month" class="view">
       <h2>Resumen mensual</h2>
+      <div id="cmp" class="panel"></div>
       <div class="panel scroll"><table id="tMonth"></table></div>
       <h2>Últimas semanas</h2>
       <div class="panel scroll"><table id="tWeek"></table></div>
@@ -83,20 +92,19 @@
 
     <!-- ================= VISTA: META ================= -->
     <section id="view-goal" class="view">
-      <h2>Meta de ahorro</h2>
+      <h2>Metas de ahorro</h2>
+      <div id="goalList"></div>
       <div class="panel">
-        <div id="goalInfo"></div>
-        <label class="fld">Nombre de la meta
+        <label class="fld">Nueva meta
           <input id="gName" type="text" placeholder="Ej. Tijeras nuevas"></label>
         <label class="fld">Monto objetivo ($)
           <input id="gTarget" type="number" inputmode="decimal" min="0" placeholder="500"></label>
-        <button id="btnGoal" class="big" type="button">Guardar meta</button>
+        <button id="btnGoal" class="big" type="button">Agregar meta</button>
       </div>
       <div class="panel">
         <label class="fld">% de la ganancia neta de hoy a abonar
           <input id="gPct" type="number" inputmode="numeric" min="1" max="100" value="10"></label>
-        <button id="btnSave" class="big" type="button">Abonar a la meta</button>
-        <button id="btnGoalReset" class="ghost" type="button">Reiniciar ahorro acumulado</button>
+        <small class="muted">Se usa con el botón "Abonar %" de cada meta.</small>
       </div>
       <h2>Respaldo de datos</h2>
       <div class="panel backup">

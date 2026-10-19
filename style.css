@@ -106,3 +106,12 @@ td.pos { color: var(--green); } td.neg { color: var(--red); }
 .backup { display: flex; gap: 8px; }
 .backup .ghost { margin-top: 0; flex: 1; }
 .lbl { display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+/* ===== Metas múltiples, comparativo y notas ===== */
+.card small { color: var(--muted); font-size: .75rem; }
+.muted { color: var(--muted); font-size: .8rem; }
+.goalbtns { display: flex; gap: 8px; margin-top: 12px; }
+.goalbtns button { flex: 1; min-height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface2); font-weight: 600; }
+.goalbtns button:first-child { border-color: var(--green); color: var(--green); }
+#cmp .fill.g { background: var(--green); } #cmp .fill.r { background: var(--red); } #cmp .fill.y { background: var(--gold); }
+#goalList .fill.g { background: var(--green); }
