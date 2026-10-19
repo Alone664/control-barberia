@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#121212">
+  <title>BarberFlow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+  <header class="top">
+    <h1>Barber<span>Flow</span></h1>
+    <small id="todayLabel"></small>
+  </header>
+
+  <main>
+    <!-- ================= VISTA: HOY ================= -->
+    <section id="view-hoy" class="view active">
+      <!-- Dashboard: 4 tarjetas -->
+      <div class="cards">
+        <div class="card gold"><label>Efectivo en mano</label><strong id="cCash">$0.00</strong></div>
+        <div class="card"><label>Acumulado en terminal</label><strong id="cTerm">$0.00</strong>
+          <button id="btnClose" class="mini" type="button">Transferido / Cierre</button></div>
+        <div class="card red"><label>Gastos del día</label><strong id="cExp">$0.00</strong></div>
+        <div class="card green"><label>Ganancia neta real</label><strong id="cNet">$0.00</strong></div>
+      </div>
+
+      <div class="datebar"><input type="date" id="dateSel" aria-label="Fecha"><button id="btnToday" type="button">Hoy</button></div>
+      <!-- Registro rápido -->
+      <div class="panel">
+        <div class="seg" id="typeTabs">
+          <button type="button" data-type="in" class="on">Ingreso</button>
+          <button type="button" data-type="out">Egreso</button>
+        </div>
+        <form id="form" data-type="in" autocomplete="off">
+          <div class="chips only-in" id="presets"></div>
+          <label class="fld">Monto <span id="lblAmount">del servicio</span> ($)
+            <input id="amount" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00" required></label>
+          <label class="fld only-in">Propina opcional ($)
+            <input id="tip" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00"></label>
+          <div class="chips only-in" id="tipChips"></div>
+          <div class="fld">
+            <span id="lblPay">Método de pago</span>
+            <div class="seg" id="payTabs">
+              <button type="button" data-pay="cash" class="on">💵 Efectivo</button>
+              <button type="button" data-pay="card">💳 Terminal</button>
+            </div>
+          </div>
+          <label class="fld only-out">Categoría
+            <select id="cat"></select></label>
+          <label class="fld only-out">Nota opcional
+            <input id="note" type="text" maxlength="60" placeholder="Ej. Tacos de la tarde, Cuchillas"></label>
+          <button id="btnSubmit" class="big" type="submit">Registrar Servicio</button>
+          <button id="btnCancel" class="ghost" type="button" hidden>Cancelar edición</button>
+        </form>
+      </div>
+
+      <!-- Historial del día -->
+      <h2>Movimientos del día</h2>
+      <ul id="list" class="list"></ul>
+    </section>
+
+    <!-- ================= VISTA: ESTADÍSTICAS ================= -->
+    <section id="view-stats" class="view">
+      <h2>Radiografía de gastos</h2>
+      <select id="period">
+        <option value="day">Hoy</option><option value="week">Esta semana</option>
+        <option value="month" selected>Este mes</option><option value="all">Todo</option>
+      </select>
+      <div id="bars" class="panel"></div>
+    </section>
+
+    <!-- ================= VISTA: RESUMEN ================= -->
+    <section id="view-month" class="view">
+      <h2>Resumen mensual</h2>
+      <div class="panel scroll"><table id="tMonth"></table></div>
+      <h2>Últimas semanas</h2>
+      <div class="panel scroll"><table id="tWeek"></table></div>
+    </section>
+
+    <!-- ================= VISTA: META ================= -->
+    <section id="view-goal" class="view">
+      <h2>Meta de ahorro</h2>
+      <div class="panel">
+        <div id="goalInfo"></div>
+        <label class="fld">Nombre de la meta
+          <input id="gName" type="text" placeholder="Ej. Tijeras nuevas"></label>
+        <label class="fld">Monto objetivo ($)
+          <input id="gTarget" type="number" inputmode="decimal" min="0" placeholder="500"></label>
+        <button id="btnGoal" class="big" type="button">Guardar meta</button>
+      </div>
+      <div class="panel">
+        <label class="fld">% de la ganancia neta de hoy a abonar
+          <input id="gPct" type="number" inputmode="numeric" min="1" max="100" value="10"></label>
+        <button id="btnSave" class="big" type="button">Abonar a la meta</button>
+        <button id="btnGoalReset" class="ghost" type="button">Reiniciar ahorro acumulado</button>
+      </div>
+      <h2>Respaldo de datos</h2>
+      <div class="panel backup">
+        <button id="btnExport" class="ghost" type="button">Exportar respaldo</button>
+        <label class="ghost lbl">Importar respaldo<input type="file" id="fileImport" accept=".json,application/json" hidden></label>
+      </div>
+    </section>
+  </main>
+
+  <!-- Navegación inferior -->
+  <nav class="nav">
+    <button data-view="hoy" class="on">Hoy</button>
+    <button data-view="stats">Gastos</button>
+    <button data-view="month">Resumen</button>
+    <button data-view="goal">Meta</button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
